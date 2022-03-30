@@ -24,7 +24,22 @@ Adding a new workspace
 
 .. admonition:: python
 
-   TBD
+   ::
+      
+      import json
+      from requests import request
+      from requests.auth import HTTPBasicAuth
+
+      url = "http://localhost:8080/geoserver/rest/workspaces"
+      user = "admin"
+      password = "geoserver"
+      payload = {"workspace":{"name": "acme"}}
+      headers = { "Content-Type": "application/json"}
+
+      response = request("POST", url, auth=HTTPBasicAuth(user,password), headers=headers, data=json.dumps(payload))
+      print(response)
+
+.. note:: The **Python** example uses a JSON Content-Type
 
 .. admonition:: java
 
@@ -57,7 +72,21 @@ Listing workspace details
 
 .. admonition:: python
 
-   TBD
+   ::
+
+      from requests import request
+      from requests.auth import HTTPBasicAuth
+
+      url = "http://localhost:8080/geoserver/rest/workspaces/acme"
+      user = "admin"
+      password = "geoserver"
+      headers = {
+         "Content-Type": "application/json",
+         "Accept": "text/xml"
+      }
+
+      response = request("GET", url, auth=HTTPBasicAuth(user,password), headers=headers)
+      print(response.json())
 
 .. admonition:: java
 
